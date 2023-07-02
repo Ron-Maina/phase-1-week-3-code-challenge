@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>Showtime: ${filmData[0].showtime}</p>
         <p>Runtime: ${filmData[0].runtime}</p>
         <P>Available tickets: ${filmData[0].tickets_sold}</p>
+        <button class="btn">Buy Ticket</button>
         `
         console.log(movie)
         let main = document.querySelector('main')
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //function to handle rendering the rest of the films
     function renderAllFilms(film){
         let movieList = document.createElement('li')
-        movieList.className = 'all-movies'
+        movieList.className = 'film-item'
         movieList.innerHTML = `
         <img src = "${film.poster}">
         <h4>${film.title}</h4>
