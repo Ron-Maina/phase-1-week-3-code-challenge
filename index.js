@@ -7,34 +7,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchFilms()
 
-        function renderFirstMovie(filmData){
-            let availableTickets = (filmData[0].capacity - filmData[0].tickets_sold)
-            let movie = document.createElement('div')
-            movie.className='movie'
-            movie.innerHTML =`
-            <img src="${filmData[0].poster}">
-            <h4>${filmData[0].title}</h4>
-            <p>Showtime: ${filmData[0].showtime}</p>
-            <p>Runtime: ${filmData[0].runtime}</p>
-            <P class="tickets">Available Tickets: ${availableTickets}</p>
-            <button class="btn">Buy Ticket</button>`
-            
-            let main = document.querySelector('main')
-            main.querySelector('#selected-movie').appendChild(movie)
+    function renderFirstMovie(filmData){
+        let availableTickets = (filmData[0].capacity - filmData[0].tickets_sold)
+        let movie = document.createElement('div')
+        movie.className='movie'
+        movie.innerHTML =`
+        <img src="${filmData[0].poster}">
+        <h4>${filmData[0].title}</h4>
+        <p>Showtime: ${filmData[0].showtime}</p>
+        <p>Runtime: ${filmData[0].runtime}</p>
+        <P class="tickets">Available Tickets: ${availableTickets}</p>
+        <button class="btn">Buy Ticket</button>`
+        
+        let main = document.querySelector('main')
+        main.querySelector('#selected-movie').appendChild(movie)
 
-            //Buy ticket for first movie
-            document.querySelector('.btn').addEventListener('click', () => {
-                if (availableTickets > 0){
-                    availableTickets-- 
-                }
-                else if(availableTickets === 0){
-                    document.querySelector('.btn').innerText = "Sold Out"  
-                }
-                document.querySelector('.tickets').textContent = `Available Tickets: ${availableTickets}`    
-                
-            })
+        //Buy ticket for first movie
+        document.querySelector('.btn').addEventListener('click', () => {
+            if (availableTickets > 0){
+                availableTickets-- 
+            }
+            else if(availableTickets === 0){
+                document.querySelector('.btn').innerText = "Sold Out" 
+            }
+            document.querySelector('.tickets').textContent = `Available Tickets: ${availableTickets}`    
             
-        }
+        })
+        
+    }
     
      
     
@@ -53,11 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <h4>${film.title}</h4>
         `
         let main = document.querySelector('main')
-        main.querySelector('#films').appendChild(movieList)
+        main.querySelector('#films-menu').appendChild(movieList)
 
         //Displaying selected movie
         console.log(movieList.querySelector('h4'))
         movieList.querySelector('h4').addEventListener('click', () => {
+            let first
             let availableTickets = (film.capacity - film.tickets_sold)
             document.querySelector('#selected-movie').innerHTML=''
             let selectedMovie = document.createElement('div')
@@ -79,7 +80,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     availableTickets--
                 }
                 else if(availableTickets === 0){
-                    document.querySelector('.btn').innerText = "Sold Out"  
+                    document.querySelector('.btn').innerText = "Sold Out"
+                    let soldOut = document.createElement('li')
+                    soldOut.className = "sold-out"
+                    soldOut.innerHTML = `
+                    <img src = "${film.poster}">
+                    <h4>${film.title}</h4>`
+                    movieList.replaceWith(soldOut) 
                 }
                 document.querySelector('.tickets').textContent = `Available Tickets: ${availableTickets}`    
                 
