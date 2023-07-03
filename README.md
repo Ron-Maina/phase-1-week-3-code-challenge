@@ -13,7 +13,7 @@
 - Open the html file of the project and click on `Go Live` to launch the program on your browser.
 * Click on the displayed movie titles' on the left to display the movie details including a buy ticket option.
 - Clicking on the `BUY TICKET` button decrements the available tickets by 1 for the selected movie
-* Once the tickets are sold out you cannot purchase another movie ticket
+* Once the tickets are sold out you cannot purchase another movie ticket and trying to purchase a ticket will make the buy ticket button change to sold out
 
 # Requirements
 * Visual Studio code

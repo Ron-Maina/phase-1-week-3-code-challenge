@@ -3,19 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchFilms(){
         fetch('http://localhost:3000/films')
         .then(res => res.json())
-        .then(filmData =>renderFirstMovie(filmData))
+        .then(filmData =>renderFirstMovie(filmData[0]))
     }
     fetchFilms()
 
+    //Render first movie details to DOM
     function renderFirstMovie(filmData){
-        let availableTickets = (filmData[0].capacity - filmData[0].tickets_sold)
+        let availableTickets = (filmData.capacity - filmData.tickets_sold)
         let movie = document.createElement('div')
         movie.className='movie'
         movie.innerHTML =`
-        <img src="${filmData[0].poster}">
-        <h4>${filmData[0].title}</h4>
-        <p>Showtime: ${filmData[0].showtime}</p>
-        <p>Runtime: ${filmData[0].runtime}</p>
+        <img src="${filmData.poster}">
+        <h4>${filmData.title}</h4>
+        <p>Showtime: ${filmData.showtime}</p>
+        <p>Runtime: ${filmData.runtime}</p>
         <P class="tickets">Available Tickets: ${availableTickets}</p>
         <button class="btn">Buy Ticket</button>`
         
@@ -35,28 +36,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
     
-     
-    
-
-    //display movie menu
+    //Fetch movies for movie menu
     fetch('http://localhost:3000/films')
     .then(res => res.json())
     .then(films => films.forEach(film => renderAllFilms(film)))
 
-    //function to handle rendering the rest of the films
+    //Render movies to movie menu
     function renderAllFilms(film){
         let movieList = document.createElement('li')
         movieList.className = 'film-item'
         movieList.innerHTML = `
         <img src = "${film.poster}">
         <h4>${film.title}</h4>
+        <hr>
         `
         document.querySelector('#films').appendChild(movieList)
 
-        //Displaying selected movie
-        console.log(movieList.querySelector('h4'))
+        //Render full details for selected movie
         movieList.querySelector('h4').addEventListener('click', () => {
-            let first
             let availableTickets = (film.capacity - film.tickets_sold)
             document.querySelector('#selected-movie').innerHTML=''
             let selectedMovie = document.createElement('div')
@@ -67,14 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Showtime: ${film.showtime}</p>
             <p>Runtime: ${film.runtime}</p>
             <p class="tickets">Available Tickets: ${availableTickets}</p>
-            <button class="btn">Buy Ticket</button>
-            `
+            <button class="btn">Buy Ticket</button>`
             document.querySelector('#selected-movie').appendChild(selectedMovie)
 
-            //Buy ticket event listener
+            //Buy ticket for selected movie
             document.querySelector('.btn').addEventListener('click', () => {
                 if (availableTickets > 0){
                     availableTickets--
+                    film.tickets_sold = (film.capacity - availableTickets)
                 }
                 else if(availableTickets === 0){
                     document.querySelector('.btn').innerText = "Sold Out"
@@ -82,21 +79,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     soldOut.className = "sold-out"
                     soldOut.innerHTML = `
                     <img src = "${film.poster}">
-                    <h4>${film.title}</h4>`
+                    <h4>${film.title}</h4>
+                    <hr>`
                     movieList.replaceWith(soldOut) 
                 }
-                document.querySelector('.tickets').textContent = `Available Tickets: ${availableTickets}`    
+                document.querySelector('.tickets').textContent = `Available Tickets: ${availableTickets}`
+                
                 
             })     
         })    
     }
-
-
-
-   
-
-
-
 
 
 })

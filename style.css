@@ -6,13 +6,23 @@ main{
     
 
 }
+#movie-menu{
+    height: 1000px; 
+    overflow-y: scroll;
+}
+#films{
+    margin-right: 10px;
+}
+
 .movie{
     text-align: center;
+    color: white;
     padding: 20px;
-    margin-left: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     margin-right: 10px;
     border: 1px solid #333;
-    background: rgba(255, 255, 255, 0.75);
+    background-color: #242424;
     padding: 15px 20px 18px 18px;
     box-shadow: 2px 5px 5px #333;
 }
