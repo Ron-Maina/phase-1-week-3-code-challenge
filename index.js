@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <P class="tickets">Available Tickets: ${availableTickets}</p>
         <button class="btn">Buy Ticket</button>`
         
-        let main = document.querySelector('main')
-        main.querySelector('#selected-movie').appendChild(movie)
+        document.querySelector('#selected-movie').appendChild(movie)
 
         //Buy ticket for first movie
         document.querySelector('.btn').addEventListener('click', () => {
@@ -52,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src = "${film.poster}">
         <h4>${film.title}</h4>
         `
-        let main = document.querySelector('main')
-        main.querySelector('#films-menu').appendChild(movieList)
+        document.querySelector('#films').appendChild(movieList)
 
         //Displaying selected movie
         console.log(movieList.querySelector('h4'))
@@ -71,8 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="tickets">Available Tickets: ${availableTickets}</p>
             <button class="btn">Buy Ticket</button>
             `
-            let main = document.querySelector('main')
-            main.querySelector('#selected-movie').appendChild(selectedMovie)
+            document.querySelector('#selected-movie').appendChild(selectedMovie)
 
             //Buy ticket event listener
             document.querySelector('.btn').addEventListener('click', () => {
@@ -103,6 +100,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 })
-
 
 
